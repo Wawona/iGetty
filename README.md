@@ -2,7 +2,7 @@
 
 Linux-shaped **virtual terminals** for Wawona Desktop Replacement (Mode B)
 after WindowServer is gone. Not the Mode B `.dylib`. That dylib and own-display
-KMS live in **wwn-iland** `iland-baremetal`.
+KMS live in **iLand** `iland-baremetal`.
 
 ```text
 iland-baremetal dylib  →  take over display (framebufferd / inputd)

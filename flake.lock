@@ -119,7 +119,7 @@
         "doorman": "doorman",
         "nixpkgs": "nixpkgs_2",
         "rust-overlay": "rust-overlay",
-        "wwn-iland": "wwn-iland",
+        "iland": "iland",
         "wwn-toolchain": "wwn-toolchain"
       }
     },
@@ -158,7 +158,7 @@
         "type": "github"
       }
     },
-    "wwn-iland": {
+    "iland": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -174,14 +174,14 @@
         "lastModified": 1788395987,
         "narHash": "sha256-PCHL+h+g36mrZePuRJwmgFleIu7zLuPkAxAiUH+YxKE=",
         "owner": "Wawona",
-        "repo": "wwn-iland",
+        "repo": "iLand",
         "rev": "3955fa4d36e894422ca43ce16284edcadb1af9d6",
         "type": "github"
       },
       "original": {
         "owner": "Wawona",
         "ref": "development",
-        "repo": "wwn-iland",
+        "repo": "iLand",
         "type": "github"
       }
     },

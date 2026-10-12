@@ -1995,7 +1995,7 @@ fn main() {
 
         let banner = b"\r\nwwn-igetty (Doorman login + Linux-shaped VTs)\r\n\
 Mode B Classic TTY uses a **single scanout lease** shared by iland, igetty,
-weston, and niri. See `wwn-iland/.../shims/modeb-coord.h` and
+weston, and niri. See `iLand/.../shims/modeb-coord.h` and
 `Wawona/docs/agent-rules/wawona-modeb-coord.md`.
 
 After login on a text VT, type `weston` or `niri` (session wrappers prefix

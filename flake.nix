@@ -10,15 +10,15 @@
     wwn-toolchain.inputs.rust-overlay.follows = "rust-overlay";
     # IOMFB and Mode B coordinate shims are consumed from development.
     # Cited: Wawona/docs/wwn-repo-dag.md.
-    wwn-iland.url = "github:Wawona/wwn-iland/development";
-    wwn-iland.inputs.nixpkgs.follows = "nixpkgs";
-    wwn-iland.inputs.rust-overlay.follows = "rust-overlay";
-    wwn-iland.inputs.wwn-toolchain.follows = "wwn-toolchain";
+    iland.url = "github:Wawona/iLand/development";
+    iland.inputs.nixpkgs.follows = "nixpkgs";
+    iland.inputs.rust-overlay.follows = "rust-overlay";
+    iland.inputs.wwn-toolchain.follows = "wwn-toolchain";
     doorman.url = "github:Wawona/doorman";
   };
 
   outputs =
-    { self, nixpkgs, rust-overlay, wwn-toolchain, wwn-iland, doorman, ... }:
+    { self, nixpkgs, rust-overlay, wwn-toolchain, iland, doorman, ... }:
     let
       darwinSystems = [ "aarch64-darwin" ];
       forAll = nixpkgs.lib.genAttrs darwinSystems;
@@ -38,10 +38,10 @@
           };
           tc = mkToolchains {
             inherit pkgs;
-            registry = baseRegistry // wwn-iland.registryFragment;
+            registry = baseRegistry // iland.registryFragment;
           };
           iland = tc.buildForMacOS "iland" { };
-          modebCoordSrc = wwn-iland + "/dependencies/libs/iland/upstream/shims";
+          modebCoordSrc = iland + "/dependencies/libs/iland/upstream/shims";
           pkg = pkgs.callPackage ./default.nix {
             inherit iland modebCoordSrc;
             doorman = doorman.packages.${system}.doorman;
