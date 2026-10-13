@@ -44,7 +44,10 @@
             registry = baseRegistry // iland.registryFragment;
           };
           ilandPkg = tc.buildForMacOS "iland" { };
-          modebCoordSrc = ilandPkg + "/dependencies/libs/iland/upstream/shims";
+          # modeb-coord.{c,h} live in the iLand *source* tree, not in the
+          # installed userland package (that only ships include/ + lib/).
+          # Pointing at ilandPkg made clang fail with "no such file".
+          modebCoordSrc = "${iland}/dependencies/libs/iland/upstream/shims";
           pkg = pkgs.callPackage ./default.nix {
             iland = ilandPkg;
             inherit modebCoordSrc;
