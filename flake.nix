@@ -38,12 +38,16 @@
           };
           tc = mkToolchains {
             inherit pkgs;
+            # Flake input `iland` (not a let binding). Shadowing it with
+            # `iland = tc.buildForMacOS "iland"` makes this let recursive and
+            # infinite-loops registryOverride evaluation.
             registry = baseRegistry // iland.registryFragment;
           };
-          iland = tc.buildForMacOS "iland" { };
-          modebCoordSrc = iland + "/dependencies/libs/iland/upstream/shims";
+          ilandPkg = tc.buildForMacOS "iland" { };
+          modebCoordSrc = ilandPkg + "/dependencies/libs/iland/upstream/shims";
           pkg = pkgs.callPackage ./default.nix {
-            inherit iland modebCoordSrc;
+            iland = ilandPkg;
+            inherit modebCoordSrc;
             doorman = doorman.packages.${system}.doorman;
           };
           iosSession = pkgs.callPackage ./ios-session.nix { inherit pkgs; };
