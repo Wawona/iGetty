@@ -14,7 +14,7 @@
     iland.inputs.nixpkgs.follows = "nixpkgs";
     iland.inputs.rust-overlay.follows = "rust-overlay";
     iland.inputs.wwn-toolchain.follows = "wwn-toolchain";
-    doorman.url = "github:Wawona/doorman";
+    doorman.url = "github:Wawona/Doorman";
   };
 
   outputs =
