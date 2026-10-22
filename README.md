@@ -1,4 +1,4 @@
-# wwn-igetty (L3′)
+# iGetty (L3′)
 
 Linux-shaped **virtual terminals** for Wawona Desktop Replacement (Mode B)
 after WindowServer is gone. Not the Mode B `.dylib`. That dylib and own-display
@@ -6,7 +6,7 @@ KMS live in **iLand** `iland-baremetal`.
 
 ```text
 iland-baremetal dylib  →  take over display (framebufferd / inputd)
-wwn-igetty (this repo) →  VT switcher + Doorman getty on text VTs
+iGetty (this repo)     →  VT switcher + Doorman getty on text VTs
 assigned GUI VT        →  weston / niri (DRM backend) or kmscube / gbm-es2 / vkcube-kms
 ```
 
@@ -62,10 +62,10 @@ vterm callbacks use a VT index, not `&Vt`. `App` is boxed after
 login text would never dirty the live VTs (F7 then F1 looked fine
 because a VT switch forces `full_redraw`).
 
-Auth: [Doorman](https://github.com/Wawona/doorman) as a library. Do not call
+Auth: [Doorman](https://github.com/Wawona/Doorman) as a library. Do not call
 `doorman_open_session()` (that forks/setsid off the PTY).
 
-DAG: toolchain + iland (DRM present) + doorman. Never Wawona, never weston as
+DAG: toolchain + iland (DRM present) + Doorman. Never Wawona, never weston as
 a flake input. Cited in `Wawona/docs/wwn-repo-dag.md`.
 
 ## iOS TrollStore logical sessions
