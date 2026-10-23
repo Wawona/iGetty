@@ -55,7 +55,7 @@ pkgs.stdenv.mkDerivation {
     echo "CC igetty (Doorman)"
     "$CLANG" $CFLAGS modeb-getty.c \
       ${doorman}/lib/libdoorman.a \
-      $AUTH_FRAMEWORKS -lpam -lobjc \
+      $AUTH_FRAMEWORKS -lpam -lSystem -lobjc \
       -o igetty
     echo "CC CoreText + Mach + vterm + modeb-coord shims"
     "$CLANG" $CFLAGS -c modeb-tty-ctfont.c -o modeb-tty-ctfont.o $FRAMEWORKS
@@ -81,6 +81,7 @@ pkgs.stdenv.mkDerivation {
       -l iland_userland \
       -l vterm \
       -C link-arg=-Wl,-rpath,${libvterm}/lib \
+      -C link-arg=-lSystem \
       -C link-arg=-lobjc \
       -C link-arg=-framework -C link-arg=IOSurface \
       -C link-arg=-framework -C link-arg=Foundation \
