@@ -38,7 +38,15 @@ pkgs.stdenv.mkDerivation {
       MACOS_SDK="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
     fi
     export SDKROOT="$MACOS_SDK"
-    CLANG="${pkgs.clang}/bin/clang"
+    # Nix ld64 rejects the Xcode 26 TBD target arm64e.x1-macos and then
+    # drops libSystem, Foundation, and PAM. The SDK's own clang uses a linker
+    # that reads those stubs.
+    APPLE_CLANG=$(xcrun --find clang 2>/dev/null || true)
+    if [ -n "$APPLE_CLANG" ] && [ -x "$APPLE_CLANG" ]; then
+      CLANG="$APPLE_CLANG"
+    else
+      CLANG="${pkgs.clang}/bin/clang"
+    fi
     INCLUDES="-I${iland}/include -I${libvterm}/include -I${doorman}/include"
     CFLAGS="-isysroot $SDKROOT -mmacosx-version-min=12.0 -O2 -std=c11 $INCLUDES -I."
     OBJCFLAGS="-isysroot $SDKROOT -mmacosx-version-min=12.0 -O2 $INCLUDES -I."
@@ -60,6 +68,7 @@ pkgs.stdenv.mkDerivation {
     echo "rustc igettyd"
     ${pkgs.rustc}/bin/rustc --edition 2021 -C opt-level=2 \
       -C debuginfo=0 \
+      -C linker="$CLANG" \
       src/main.rs -o igettyd \
       -C link-arg=-isysroot -C link-arg="$SDKROOT" \
       -C link-arg=-mmacosx-version-min=12.0 \
